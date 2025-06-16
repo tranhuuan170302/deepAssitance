@@ -1,0 +1,14 @@
+model_list:
+  - model_name: llama32
+    litellm_params:
+      model: novita/meta-llama/llama-3.2-1b-instruct
+      # api_base: https://api.novita.ai/v3/openai
+      api_key: "os.environ/OPENAI_API_KEY"
+      rpm: 6
+  
+  - model_name: bgeM3
+    litellm_params:
+      model: novita/baai/bge-m3
+      # api_base: https://api.novita.ai/v3/openai
+      api_key: "os.environ/OPENAI_API_KEY"
+      rpm: 6

@@ -1,0 +1,3 @@
+[submodule "services/LightRAG"]
+	path = services/LightRAG
+	url = https://github.com/tranhuuan170302/deepAssitance.git
