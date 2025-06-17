@@ -11,11 +11,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/healthy")
-def read_root():
-    return {
-        "message": "hello"
-    }
+def register():
+    server_info = ServerInfo
 
 
 if __name__ == "__main__":
