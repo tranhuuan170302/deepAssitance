@@ -1,45 +1,12 @@
 version: '3.8'
 
 services:
-  
-  # agent_service:
-    
-  # index_service:
-    
-  # managerment_service:
-    
-  # mcp_servers:
-    
-  # ui_service:
-
-  # database service
-  neo4j:
-    container_name: demo-neo4j
-    image: neo4j:latest
-    environment:
-      - NEO4J_AUTH=neo4j/neo4j123
-      - NEO4J_PLUGINS=["apoc", "genai"]
-      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
-      - NEO4J_dbms_security_procedures_allowlist=apoc.*
-      - NEO4J_dbms_memory_transaction_global__max__size=2GB
-      - NEO4J_server_memory_pagecache_size=512M
-      - NEO4J_server_default__listen__address=0.0.0.0
-      - NEO4J_server_directories_logs=/logs
-    ports:
-      - "7687:7687"
-      - "7474:7474"
-    volumes:
-      - demo-graphdb-volume:/data
-    networks:
-      - demo-Intelli-chat
-    restart: unless-stopped
-
 
   qdrant:
     container_name: demo-qdrant
     image: qdrant/qdrant:latest
     ports:
-      - "6333:6333"
+      - "6003:6333"
     volumes:
       - demo-qdrant-volume:/qdrant/storage
     configs:
@@ -53,7 +20,7 @@ services:
     container_name: demo-redis
     image: redis:latest
     ports:
-      - "6379:6379"
+      - "6001:6379"
     volumes:
       - demo-redis-volume:/data
     networks:
@@ -68,48 +35,12 @@ services:
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=sale
     ports:
-      - "5432:5432"
+      - "6000:5432"
     volumes:
       - demo-postgresql-volume:/var/lib/postgresql/data
     restart: unless-stopped
     networks:
       - demo-Intelli-chat
-
-  # lightrag service
-  lightrag:
-    container_name: lightrag
-    image: ghcr.io/hkuds/lightrag:latest
-    build:
-      context: ./services/LightRAG
-      dockerfile: Dockerfile
-      tags:
-        - ghcr.io/hkuds/lightrag:latest
-    ports:
-      - "${PORT:-9621}:9621"
-    depends_on:
-      - neo4j
-      - qdrant
-      - redis
-    volumes:
-      - demo-lightrag-ragstorage-volume:/app/data/rag_storage
-      - demo-lightrag-inputs-volume:/app/data/inputs
-      - ./.env:/app/.env
-    env_file:
-      - ./services/LightRAG/.env
-    restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    networks:
-      - demo-Intelli-chat
-  
-  # ollama:
-  #   container_name: ollama
-  #   image: ollama/ollama
-  #   ports:
-  #     - "11434:11434"
-  #   networks:
-  #     - demo-Intelli-chat
-  #   restart: unless-stopped
 
 volumes:
   demo-graphdb-volume:

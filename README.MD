@@ -79,4 +79,3 @@ When a user input lacks clarity, Deep Assistant:
 ## ✅ Get Started
 
 _Installation, environment setup, and API usage instructions can be added here…_
-

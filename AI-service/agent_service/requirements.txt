@@ -1,0 +1,15 @@
+fastapi
+requests
+httpx
+langchain
+litellm
+uvicorn
+langchain-core
+langchain-mcp-adapters
+langchain-ollama
+langchain-openai
+langchain-text-splitters
+langgraph-checkpoint
+langgraph-sdk
+langsmith
+langgraph

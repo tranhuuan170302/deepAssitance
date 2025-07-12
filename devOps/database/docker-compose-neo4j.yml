@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  neo4j-master:
+    container_name: neo4j-master
+    image: neo4j:5.20-enterprise
+    environment:
+      - NEO4J_AUTH=neo4j/neo4j123
+      - NEO4J_PLUGINS=["apoc", "genai"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+      - NEO4J_dbms_security_procedures_allowlist=apoc.*
+      - NEO4J_dbms_memory_transaction_global__max__size=2GB
+      - NEO4J_server_memory_pagecache_size=512M
+      - NEO4J_server_default__listen__address=0.0.0.0
+      - NEO4J_server_directories_logs=/logs
+    ports:
+      - "6004:7687"
+      - "6005:7474"
+    volumes:
+      - graphdb-volume-core:/data
+      - graphdb-volume-backup:/data
+    networks:
+      - demo-Intelli-chat
+    restart: unless-stopped  
+  
+  neo4j-slave:
+    container_name: neo4j-slave
+    image: neo4j:5.20-enterprise
+    environment:
+      - NEO4J_AUTH=neo4j/neo4j123
+      - NEO4J_PLUGINS=["apoc", "genai"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+      - NEO4J_dbms_security_procedures_allowlist=apoc.*
+      - NEO4J_dbms_memory_transaction_global__max__size=2GB
+      - NEO4J_server_memory_pagecache_size=512M
+      - NEO4J_server_default__listen__address=0.0.0.0
+      - NEO4J_server_directories_logs=/logs
+    ports:
+      - "6006:7687"
+      - "6007:7474"
+    volumes:
+      - demo-graphdb-volume:/data
+    networks:
+      - demo-Intelli-chat
+    depends_on:
+      - neo4j-master
+    restart: unless-stopped
