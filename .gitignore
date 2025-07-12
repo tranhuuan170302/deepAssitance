@@ -1,2 +1,6 @@
-# Ignore virtual environment folder
-services/agent_service/.agent_venv/
+AI-service/agent_service/.agent_venv
+docs
+Backend-service/chat-service/configs/production.yaml
+Ollama
+AI-service/index_serivce/.venv
+devOps/all-server/.env

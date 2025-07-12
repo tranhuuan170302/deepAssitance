@@ -1,0 +1,17 @@
+server:
+  port: 7000
+
+postgress:
+  host: localhost
+  port: 6000
+  username: admin
+  password: admin
+  dbname: sale
+  maxIdleConns: 10
+  maxOpenConns: 100
+  connMaxLifetime: 3600
+
+redis:
+  host: localhost
+  port: 6001
+  
