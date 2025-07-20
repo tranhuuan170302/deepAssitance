@@ -29,7 +29,7 @@ services:
       - LITELLM_MASTER_KEY=litellm123
       - UI_USERNAME=admin
       - UI_PASSWORD=admin123123
-      - OPENAI_API_KEY="sk_biuk5L0-NzYh5QoDl_vZSwHr0RxOJibZLXcGFlbyTqM"
+      - OPENAI_API_KEY=""
       - DATABASE_URL=postgresql://admin:admin123123@postgres:5432/litellmdb
     command: --config /app/config.yaml
   
